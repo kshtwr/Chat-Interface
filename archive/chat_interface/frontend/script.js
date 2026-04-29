@@ -28,9 +28,13 @@ async function send(){
 }
 
 async function llm_call(prompt){
-    const url = "https://api.chucknorris.io/jokes/random";
+    const url = "http://localhost:3000/chat";
     try{
-        const response = await fetch(url);
+        const response = await fetch(url,{
+            method: "POST",
+            headers:{"Content-Type": "application/json"},
+            body: JSON.stringify({message: prompt})
+        });
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }

@@ -1,0 +1,69 @@
+body{
+    margin:20px;
+    background: radial-gradient(saddlebrown, rgb(201, 132, 83));
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#card{
+    margin:40px auto;
+    width:400px; 
+    padding: 20px 40px;
+    font-family: monospace;
+    display: flex;
+    border-bottom: 10px solid black;
+    justify-content: space-around;
+    background-image: url(images/Art\ Running\ GIF.gif);
+    background-size: cover;
+    box-shadow: 5px 5px 3px beige;
+
+}
+
+.profile-img{
+    width: 150px;
+    box-shadow: 5px 5px 3px black;
+}
+
+.text{
+    margin-left: 20px;
+}
+
+@font-face {
+    font-family: Guntech;
+    src: url(fonts/Guntech.otf);
+}
+
+.role{
+    border-bottom: 2px solid black;
+    padding: 5px;
+    background: saddlebrown;
+    color: white;
+    
+    
+}
+
+.gift-img{
+    height: 500px;
+    width: 500px;
+    background-size: cover;
+    margin: 0 auto;
+    border: 4px solid black;
+    border-radius: 10px;
+    background-image: url("https://media.istockphoto.com/id/873821914/vector/red-satin-ribbon-and-bow.jpg?s=612x612&w=0&k=20&c=fhkp8Wyq7xyLrMU864F0gg09tjlk7h4m_9i1VMOqjsk=");
+}
+
+.gift-img:hover{
+    background-image: url(images/Art\ Running\ GIF.gif);
+    background-size: cover;
+}
+
+.terms{
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-style: italic;
+    border-bottom: 1px dotted white;
+}
