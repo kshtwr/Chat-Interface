@@ -27,17 +27,27 @@ body{
     padding: 5px 10px;
     border-radius: 12px;
     color: #80aadd;
+    margin: 10px 0;
 
 }
 
 .llm-output{
-    display: flex;
     align-self:flex-start;
     background-color: #262624;
     padding: 5px 10px;
     border-radius: 12px;
     color: #faf9f6;
+    margin: 10px 0;
 }
+
+.llm-output h1{
+    font-size: 1.3em;
+}
+
+.llm-output h2{
+    font-size: 1.1em;
+}
+
 
 .output-error{
     display: flex;

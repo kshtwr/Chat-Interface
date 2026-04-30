@@ -1,13 +1,13 @@
 async function send(){
     const val = document.getElementById("input").value
     console.log(val)
-    const text = document.createElement("p");
+    const text = document.createElement("div");
     text.innerHTML = val
     text.classList.add("user-input")
     document.getElementById("chat-window").appendChild(text)
     document.getElementById("input").value = "";
 
-    const loading_text = document.createElement("p");
+    const loading_text = document.createElement("div");
     loading_text.innerHTML = "Thinking...";
     loading_text.classList.add("llm-output");
     document.getElementById("chat-window").appendChild(loading_text)
@@ -15,7 +15,7 @@ async function send(){
     let output = await llm_call(val);
     loading_text.remove()
     console.log(output)
-    const out_text = document.createElement("p");
+    const out_text = document.createElement("div");
     if (!(output == "ERROR")){
         out_text.innerHTML = marked.parse(output);
         out_text.classList.add("llm-output");
