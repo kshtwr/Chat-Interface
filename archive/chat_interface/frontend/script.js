@@ -2,13 +2,13 @@ async function send(){
     const val = document.getElementById("input").value
     console.log(val)
     const text = document.createElement("p");
-    text.innerText = val
+    text.innerHTML = val
     text.classList.add("user-input")
     document.getElementById("chat-window").appendChild(text)
     document.getElementById("input").value = "";
 
     const loading_text = document.createElement("p");
-    loading_text.innerText = "Thinking...";
+    loading_text.innerHTML = "Thinking...";
     loading_text.classList.add("llm-output");
     document.getElementById("chat-window").appendChild(loading_text)
 
@@ -17,10 +17,10 @@ async function send(){
     console.log(output)
     const out_text = document.createElement("p");
     if (!(output == "ERROR")){
-        out_text.innerText = output;
+        out_text.innerHTML = marked.parse(output);
         out_text.classList.add("llm-output");
     } else{
-        out_text.innerText = "Something went wrong, please try again!";
+        out_text.innerHTML = "Something went wrong, please try again!";
         out_text.classList.add("output-error");
     }
     document.getElementById("chat-window").appendChild(out_text);
