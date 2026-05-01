@@ -12,22 +12,15 @@ async function send(){
     loading_text.classList.add("llm-output");
     document.getElementById("chat-window").appendChild(loading_text)
 
-    let output = await llm_call(val);
-    loading_text.remove()
-    console.log(output)
-    const out_text = document.createElement("div");
-    if (!(output == "ERROR")){
-        out_text.innerHTML = marked.parse(output);
-        out_text.classList.add("llm-output");
-    } else{
-        out_text.innerHTML = "Something went wrong, please try again!";
-        out_text.classList.add("output-error");
-    }
-    document.getElementById("chat-window").appendChild(out_text);
+    const out_text = document.createElement("div");    
+    out_text.classList.add("llm-output");
+
+    await sample_call(val, out_text, loading_text);
+    //await llm_call(val, out_text, loading_text);
 
 }
 
-async function llm_call(prompt){
+async function llm_call(prompt, out_text, loading_text){
     const url = "http://localhost:3000/chat";
     try{
         const response = await fetch(url,{
@@ -35,16 +28,51 @@ async function llm_call(prompt){
             headers:{"Content-Type": "application/json"},
             body: JSON.stringify({message: prompt})
         });
+
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        const result = await response.json();
-        //console.log(result.value)
-        return (result.value)
+        
+        const reader = response.body.getReader();
+        const textDecoder = new TextDecoder();
+        result = ""
+        
+        const cursor = document.createElement("span");
+        const text = document.createElement("span");
+        cursor.innerHTML = "▌"
+        cursor.classList.add("cursor");
+
+        console.log(cursor)
+
+        loading_text.remove()
+        document.getElementById("chat-window").appendChild(out_text);
+
+        out_text.appendChild(text);
+        out_text.appendChild(cursor);
+
+        while (true){
+            const {done, value} = await reader.read()
+            if (done) {break} else{
+                text.innerHTML += textDecoder.decode(value);
+                result+= textDecoder.decode(value)
+            }
+        }
+
+        cursor.remove()
+        text.innerHTML = marked.parse(result)
 
     } catch(error){
         console.error(error.message)
         return "ERROR"
     }
+
+}
+
+async function sample_call(val, out_text, loading_text){
+    loading_text.remove()
+    document.getElementById("chat-window").appendChild(out_text);
+
+    out_text.innerHTML = marked.parse("# Hello\n\nThis is **bold** and *italic* text.\n\n- item one\n- item two\n- item three")
+
 
 }

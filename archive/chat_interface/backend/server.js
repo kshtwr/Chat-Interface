@@ -10,20 +10,36 @@ const client = new Anthropic();
 app.use(express.json())
 app.use(cors())
 
+var context = []
+
 app.listen(3000, () => {
     console.log('Server running!')
 })
 
 app.post('/chat', async (req,res) => {   
     const request = req.body.message 
-    const msg = await client.messages.create({
+    context.push({role:"user", content:request})
+    const msg = await client.messages.stream({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 1024,
-        messages: [{
-          role: "user",
-          content: request
-        }],
+        messages: context,
+        system: "Keep answers brief."
       });
-    console.log(msg)    
-    res.json({value : msg.content[0].text})
+    console.log(msg)
+
+    let output = ""
+
+    res.setHeader('Content-Type', 'text/plain')
+    res.setHeader('Transfer-Encoding', 'chunked')
+
+    for await (const chunk of msg) {
+      if (chunk.type === "content_block_delta" && chunk.delta.type === "text_delta") {
+        res.write(chunk.delta.text);
+        output += chunk.delta.text
+      }
+    }
+
+    res.end();
+
+    context.push({role:"assistant", content: output})    
 })
