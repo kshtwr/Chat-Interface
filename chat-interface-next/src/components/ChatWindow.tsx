@@ -27,8 +27,8 @@ export default function ChatWindow(){
         setMessages([...new_messages, {role: "assistant", content: output.value}])
     }
 
-    return <div>
-        <div>
+    return <div className = {"flex flex-col h-[75vh] bg-white w-1/2 p-5 my-[5%] mx-auto rounded-[3%] shadow-sm"}> 
+        <div className = {"grow overflow-y-auto flex flex-col gap-[10px] pb-[10px]"}>
             {messages.map((message, idx) =>
                 <MessageBubble key ={idx} role = {message.role} content={message.content} />
             )}
