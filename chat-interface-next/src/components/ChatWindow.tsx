@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 type Message = {
     content: string
-    role: "user" | "assistant"
+    role: "user" | "assistant" | "error"
 }
 
 export default function ChatWindow(){
@@ -21,16 +21,20 @@ export default function ChatWindow(){
             let url = "/api/chat"
 
             setIsLoading(true);
-            const response = await fetch(url,{
-                method: "POST",
-                headers:{"Content-Type": "application/json"},
-                body: JSON.stringify({messages: new_messages})
-            });
-            
-            const output = await response.json()
-            setIsLoading(false);
-            
-            setMessages([...new_messages, {role: "assistant", content: output.value}])
+            try {
+                const response = await fetch(url,{
+                    method: "POST",
+                    headers:{"Content-Type": "application/json"},
+                    body: JSON.stringify({messages: new_messages})
+                });
+                
+                const output = await response.json() 
+                setIsLoading(false);
+                setMessages([...new_messages, {role: "assistant", content: output.value}])               
+            } catch {
+                setIsLoading(false);
+                setMessages([...new_messages, {role: "error", content:"Error getting response. Please try again."}])
+            }
         }
     }
 
