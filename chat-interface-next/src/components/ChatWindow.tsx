@@ -15,7 +15,7 @@ export default function ChatWindow(){
 
 
     async function handleSend(e: string) {
-        if (e) {
+        if (e.trim()) {
             const new_messages: Message[] = [...messages, {role: "user", content: e}]
             setMessages(new_messages)
             
@@ -73,6 +73,6 @@ export default function ChatWindow(){
             <div ref = {scrollRef}/>
         </div>
         
-        <ChatInput onSend = {handleSend} />
+        <ChatInput isLoading = {isLoading} onSend = {handleSend} />
     </div>
 }
