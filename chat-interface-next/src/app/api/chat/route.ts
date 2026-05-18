@@ -12,11 +12,18 @@ export async function POST(request: Request) {
         messages: req.messages,
         system: "Keep answers brief."
       });
+
     
-    const stream = await msg.finalMessage();
-    const textBlock = stream.content.find((block) => block.type == "text") // I need to read more about ReadableStream
-    if (textBlock && textBlock.type === "text") {
-        return Response.json({ value: textBlock.text })
-    }
+    const stream = new ReadableStream({
+        async start(controller) {
+            for await (const chunk of msg){
+                if (chunk.type === "content_block_delta" && chunk.delta.type === "text_delta"){
+                    controller.enqueue(chunk.delta.text)
+                }
+            }
+            controller.close()
+        }
+    })
+    return new Response(stream)
       
 }
