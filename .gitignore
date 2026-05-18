@@ -5,3 +5,6 @@
 node_modules
 
 .env.claude
+.claude
+
+archive/chat_interface/backend/.env
