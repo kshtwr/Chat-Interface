@@ -1,1 +1,0 @@
-You can use the .includes() method to complete this challenge.

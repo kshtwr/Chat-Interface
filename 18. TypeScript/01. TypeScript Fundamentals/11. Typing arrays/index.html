@@ -1,7 +1,0 @@
-<html>
-    <head>
-    </head>
-    <body>
-        <script src="./index.ts" type="module"></script>
-    </body>
-</html>

@@ -1,9 +1,38 @@
-# Fullstack Developer Challenge Files
+# Learning Fullstack Development by making an AI Chat Interface
 
-These are the challenge files for the YouTube course: [Become a Fullstack Developer from Scratch – Full Beginner's Tutorial](https://www.youtube.com/watch?v=LzMnsfqjzkA). To get started, download or clone the entire repo and then navigate to the folder you need - the folders are structured just like the course. 
+A personal learning repo documenting my journey into fullstack development, built around a single project: an AI chat interface.
 
-For the full interactive learning experience, check out our [Fullstack Developer Path on Scrimba](https://scrimba.com/fullstack-path-c0fullstack).
+## Live Demo
 
-If you have any problems at all, you can reach out to us via our [Support Centre](scrimba.com/help) or join our [Discord server](scrimba.com/discord) and we'll give you a hand. 
+[chat-interface-next.vercel.app](https://chat-interface-next.vercel.app/)
 
-Happy learning!
+## Projects
+
+### `chat-interface-next/` — AI Chat Interface (Next.js)
+A full-stack AI chat interface built with Next.js, TypeScript, and Tailwind CSS.
+
+**Features:**
+- Real-time streaming responses from Claude (Anthropic)
+- Markdown rendering with syntax support
+- Conversation history per session
+- Loading indicator and error handling
+- Enter to send, auto-scroll
+- Aqua-inspired UI
+
+**Stack:**
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+- Anthropic SDK (claude-haiku-4-5)
+
+### `archive/chat_interface/` — Original Vanilla JS Version
+The first iteration of the chat interface, built from scratch with vanilla HTML, CSS, and JavaScript, with a Node.js/Express backend. Built as a learning exercise before rebuilding in Next.js.
+
+**Stack:**
+- HTML, CSS, JavaScript
+- Node.js + Express
+- Anthropic SDK
+
+## About
+
+This repo started as a fullstack learning project. The chat interface was built twice — first in vanilla JS to understand the fundamentals, then rebuilt in Next.js to learn the framework. All full-stack knowledge reflected here came from building these projects.
